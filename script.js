@@ -81,7 +81,10 @@ const captions = [
     "HELP ME",
     "mom come pick me up",
     "the legend",
-    "come at me bro"
+    "come at me bro",
+    "he chonk",
+    "poor lil guy",
+    "Breakdancing Champ"
 
 
 
@@ -101,24 +104,28 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   maxTextWidth = width / 2;
   maxImageSize = width / 2;
+  if(height < maxImageSize){
+    maxTextWidth = height * 0.9;
+    maxImageSize = height * 0.9;
+  }
   background(255);
   
-  makeLeftShirt();
-  makeRightShirt();
-  let leftButton = createButton('vote for me');
-  leftButton.position(maxImageSize *0.42, maxImageSize);
-  leftButton.mousePressed(makeRightShirt);
-  let rightButton = createButton('vote for me');
-  rightButton.position(maxImageSize *1.42, maxImageSize);
-  rightButton.mousePressed(makeLeftShirt);
+  makeRandomShirt(0)
+  makeRandomShirt(maxImageSize)
+  let leftButton = createButton('VOTE LEFT');
+  leftButton.position(maxImageSize *0.46, maxImageSize*0.975);
+  leftButton.mousePressed(voteLeft);
+  let rightButton = createButton('VOTE RIGHT');
+  rightButton.position(maxImageSize *1.46, maxImageSize*0.975);
+  rightButton.mousePressed(voteRight);
   noLoop();
 }
 
-function makeLeftShirt(){
+function voteRight(){
     makeRandomShirt(0)
 }
-function makeRightShirt(){
-    makeRandomShirt(width/2)
+function voteLeft(){
+    makeRandomShirt(maxImageSize)
 }
 
 function makeRandomShirt(topLeftCorner){
