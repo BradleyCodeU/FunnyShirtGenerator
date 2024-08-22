@@ -26,7 +26,30 @@ const imageFilenames = [
     "img (6).PNG",
     "img (7).PNG",
     "img (8).png",
-    "img (9).png"
+    "img (9).png",
+    "seventhPeriod (1).jpg",
+    "seventhPeriod (1).PNG",
+    "seventhPeriod (10).PNG",
+    "seventhPeriod (11).png",
+    "seventhPeriod (12).png",
+    "seventhPeriod (13).png",
+    "seventhPeriod (14).png",
+    "seventhPeriod (15).png",
+    "seventhPeriod (16).png",
+    "seventhPeriod (17).png",
+    "seventhPeriod (18).png",
+    "seventhPeriod (19).png",
+    "seventhPeriod (2).jpg",
+    "seventhPeriod (2).PNG",
+    "seventhPeriod (20).png",
+    "seventhPeriod (21).png",
+    "seventhPeriod (3).PNG",
+    "seventhPeriod (4).PNG",
+    "seventhPeriod (5).PNG",
+    "seventhPeriod (6).PNG",
+    "seventhPeriod (7).PNG",
+    "seventhPeriod (8).PNG",
+    "seventhPeriod (9).PNG"
   ];
 
 const captions = [
