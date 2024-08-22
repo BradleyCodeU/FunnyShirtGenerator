@@ -49,7 +49,20 @@ const imageFilenames = [
     "seventhPeriod (6).PNG",
     "seventhPeriod (7).PNG",
     "seventhPeriod (8).PNG",
-    "seventhPeriod (9).PNG"
+    "seventhPeriod (9).PNG",
+    "eighth (1).jpg",
+    "eighth (1).PNG",
+    "eighth (10).png",
+    "eighth (2).jpg",
+    "eighth (2).PNG",
+    "eighth (3).jpg",
+    "eighth (3).PNG",
+    "eighth (4).PNG",
+    "eighth (5).PNG",
+    "eighth (6).png",
+    "eighth (7).png",
+    "eighth (8).png",
+    "eighth (9).png"
   ];
 
 const captions = [
@@ -107,11 +120,12 @@ const captions = [
     "come at me bro",
     "he chonk",
     "poor lil guy",
-    "Breakdancing Champ"
-
-
-
-
+    "Breakdancing Champ",
+    "Not Again!",
+    ":3",
+    "UwU",
+    "*jazz music stops*",
+    "I want to speak to your manager!"
 ];
 
 function preload() {
@@ -169,15 +183,12 @@ function makeRandomShirt(topLeftCorner){
   // Adjust text size to fit within the canvas
   textAlign(CENTER, CENTER);
   let textSizeValue = calculateTextSize(captionText, maxTextWidth);
-  textSize(textSizeValue);
   textStyle(BOLD);
   stroke(255);
   strokeWeight(8);
-  fill(255);
-  text(captionText, topLeftCorner + maxImageSize / 2, maxImageSize*0.75);
   textSize(textSizeValue);
   fill(0);
-  text(captionText, topLeftCorner + maxImageSize / 2, maxImageSize*0.75 + 1);
+  text(captionText, topLeftCorner + maxImageSize / 2, maxImageSize*0.75);
 }
 
 function calculateTextSize(text, maxWidth) {
