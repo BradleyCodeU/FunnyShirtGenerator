@@ -62,7 +62,24 @@ const imageFilenames = [
     "eighth (6).png",
     "eighth (7).png",
     "eighth (8).png",
-    "eighth (9).png"
+    "eighth (9).png",
+    "secondPeriod1.png",
+    "secondPeriod2.png",
+    "secondPeriod3.png",
+    "secondPeriod4.png",
+    "secondPeriod5.png",
+    "secondPeriod6.png",
+    "secondPeriod7.png",
+    "secondPeriod8.png",
+    "secondPeriod9.png",
+    "secondPeriod10.png",
+    "secondPeriod11.png",
+    "secondPeriod12.png",
+    "secondPeriod13.png",
+    "secondPeriod14.png",
+    "secondPeriod15.png",
+    "secondPeriod16.png",
+    "secondPeriod17.png"
   ];
 
 const captions = [
@@ -125,7 +142,115 @@ const captions = [
     ":3",
     "UwU",
     "*jazz music stops*",
-    "I want to speak to your manager!"
+    "I want to speak to your manager!",
+    "I'm a cutie",
+    "Shake it. Don't break it.",
+    "I'm a box",
+    "LITERALLY ME",
+    "Take me tubing!",
+    "GOTTA LOVE BAKED BEANS",
+    "ANYONE NEED BUTTER?",
+    "ARE YOU GOING TO STUDY HALL?",
+    "This is my weekend look",
+    "It was inevitable",
+    "Please help me",
+    "BYEEEEEE",
+    "Time is irrelevant",
+    "Catch me if you can",
+    "Fallin for u",
+    "TEETH",
+    "Family Reunion",
+    "See ya tomorrow",
+    "THIS IS FINE",
+    "*SUPER*STAR*",
+    "Why though?",
+    "Not today, Satan",
+    "Yeet",
+    "Bruh Moment",
+    "Big Mood",
+    "You had one job",
+    "Cursed Image",
+    "Let that sink in",
+    "Unexpected Item in Bagging Area",
+    "Sending Good Vibes",
+    "Can't even",
+    "I Can't Believe You've Done This",
+    "Why am I like this?",
+    "Delete This",
+    "I'm in danger",
+    "Mood",
+    "Here we go again",
+    "Oh no baby, what is you doing?",
+    "Nailed it",
+    "When you realize...",
+    "Wait, what?",
+    "Why are we here, just to suffer?",
+    "That's a lotta damage",
+    "Y'all Got Any More Of That?",
+    "My disappointment is immeasurable",
+    "Nobody:...",
+    "This is where the fun begins",
+    "That's Hot",
+    "Ight, I'mma head out",
+    "Welp",
+    "Yeeeee Haw!",
+    "Noice",
+    "I Can't Unsee This",
+    "I'm baby",
+    "When will you learn?",
+    "He Protec, but he also Attac",
+    "One does not simply...",
+    "It's over 9000!",
+    "Cringe",
+    "Shook",
+    "Vibe Check",
+    "Big Yikes",
+    "Bet",
+    "OK Boomer",
+    "Ain't nobody got time for that",
+    "Guess I'll die",
+    "Send it!",
+    "It's a trap!",
+    "This ain't it, chief",
+    "Can't stop, won't stop",
+    "Get rekt",
+    "Zero chill",
+    "Me, an intellectual",
+    "Big brain time",
+    "Oh lawd he comin'",
+    "It do be like that sometimes",
+    "Yikes forever",
+    "Weird champ",
+    "Sorry, not sorry",
+    "Oof",
+    "I see what you did there",
+    "Plot twist",
+    "Just vibin'",
+    "High key",
+    "Low key",
+    "You love to see it",
+    "Big oof",
+    "You're doing amazing, sweetie",
+    "Straight up",
+    "Whole vibe",
+    "Say what?",
+    "Issa vibe",
+    "I'm shooketh",
+    "Flexin on em",
+    "Woke up and chose violence",
+    "Catch these hands",
+    "Spillin' the tea",
+    "Vibing in the chat",
+    "Clownin",
+    "Major key",
+    "Bruh",
+    "Don't @ me",
+    "No chill",
+    "This is sus",
+    "SUS",
+    "Nah fam",
+    "Not like this",
+    "Can't unsee"
 ];
 
 function preload() {
@@ -146,7 +271,6 @@ function setup() {
     maxImageSize = height * 0.9;
   }
   background(255);
-  
   makeRandomShirt(0)
   makeRandomShirt(maxImageSize)
   let leftButton = createButton('VOTE LEFT');
@@ -170,6 +294,16 @@ function makeRandomShirt(topLeftCorner){
   currentIndex = int(random(images.length));
   img = images[currentIndex];
   captionText = random(captions);
+  
+  if(random() < 0.25){
+    captionText = captionText.toUpperCase(); // ALL CAPS
+  } 
+  if(random() < 0.25){
+    captionText = captionText.toLowerCase(); 
+  } 
+  if(random() < 0.25){
+    captionText = toMockingText(captionText);
+  }
   
   // Display the image and caption
   imageMode(CENTER);
@@ -228,4 +362,20 @@ function calculateTextSize(text, maxWidth) {
     let resizedImg = createImage(newWidth, newHeight);
     resizedImg.copy(img, 0, 0, imgWidth, imgHeight, 0, 0, newWidth, newHeight);
     return resizedImg;
+  }
+
+  function toMockingText(text){
+    let result = "";
+    let letterCount = 0;
+    for(let i=0; i<text.length; i++){
+      if(letterCount%2==0){
+        result += text.charAt(i).toLowerCase();
+      } else {
+        result += text.charAt(i).toUpperCase();
+      }
+      if(text.charAt(i) != " "){
+        letterCount++;
+      }
+    }
+    return result;
   }
