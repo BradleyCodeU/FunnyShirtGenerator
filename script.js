@@ -80,302 +80,302 @@ const imageFilenames = [
     "secondPeriod15.png",
     "secondPeriod16.png",
     "secondPeriod17.png"
-  ];
+];
 
 const captions = [
-    "Demure",
-    "Goofy",
-    "i guess we doin",
-    "Do You Like My Sword",
-    "This is my life",
-    "Mother",
-    "My Dream",
-    "Howdy",
-    "Derp",
-    "Just Lost My Dawg",
-    "You Serve",
-    "This is Ohio",
-    "I hate it here",
-    "Thas Tough",
-    "This is a nightmare",
-    "No Cap",
-    "Weird Flex But Okay",
-    "We Stan",
-    "Poyo",
-    "Theyre in the walls",
-    "Get out of my head",
-    "Rats!",
-    "Ratatouille",
-    "No Maidens?",
-    "?!",
-    "Gold Medal Winner",
-    "100%",
-    "The Guy From Fortnite?",
-    "This is the ideal male body",
-    "I'm so skibidi",
-    "Forever Alone",
-    "Friendship is Magic",
-    "*internal screaming*",
-    "wat?",
-    "Bro Do You Even Lift?",
-    "Haters Gonna Hate",
-    "This Is Fine",
-    "10/10",
-    "Aww Yea",
-    "don't talk to me or my son ever again",
-    "I Only Cried For 20 Minutes",
-    "MOAR!",
-    "No, This Is Patrick",
-    "Who Put You on the Planet?",
-    "Maximum Overdrive",
-    "Thanks, I Hate It",
-    "Aight Imma Head Out",
-    "when u hear a noise at night",
-    "HELP ME",
-    "mom come pick me up",
-    "the legend",
-    "come at me bro",
-    "he chonk",
-    "poor lil guy",
-    "Breakdancing Champ",
-    "Not Again!",
     ":3",
-    "UwU",
+    "?!",
+    "*internal screaming*",
     "*jazz music stops*",
-    "I want to speak to your manager!",
-    "I'm a cutie",
-    "Shake it. Don't break it.",
-    "I'm a box",
-    "LITERALLY ME",
-    "Take me tubing!",
-    "GOTTA LOVE BAKED BEANS",
+    "*SUPER*STAR*",
+    "10/10",
+    "100%",
+    "Aight Imma Head Out",
+    "Ain't nobody got time for that",
     "ANYONE NEED BUTTER?",
     "ARE YOU GOING TO STUDY HALL?",
-    "This is my weekend look",
-    "It was inevitable",
-    "Please help me",
-    "BYEEEEEE",
-    "Time is irrelevant",
-    "Catch me if you can",
-    "Fallin for u",
-    "TEETH",
-    "Family Reunion",
-    "See ya tomorrow",
-    "THIS IS FINE",
-    "*SUPER*STAR*",
-    "Why though?",
-    "Not today, Satan",
-    "Yeet",
-    "Bruh Moment",
-    "Big Mood",
-    "You had one job",
-    "Cursed Image",
-    "Let that sink in",
-    "Unexpected Item in Bagging Area",
-    "Sending Good Vibes",
-    "Can't even",
-    "I Can't Believe You've Done This",
-    "Why am I like this?",
-    "Delete This",
-    "I'm in danger",
-    "Mood",
-    "Here we go again",
-    "Oh no baby, what is you doing?",
-    "Nailed it",
-    "When you realize...",
-    "Wait, what?",
-    "Why are we here, just to suffer?",
-    "That's a lotta damage",
-    "Y'all Got Any More Of That?",
-    "My disappointment is immeasurable",
-    "Nobody:...",
-    "This is where the fun begins",
-    "That's Hot",
-    "Ight, I'mma head out",
-    "Welp",
-    "Yeeeee Haw!",
-    "Noice",
-    "I Can't Unsee This",
-    "I'm baby",
-    "When will you learn?",
-    "He Protec, but he also Attac",
-    "One does not simply...",
-    "It's over 9000!",
-    "Cringe",
-    "Shook",
-    "Vibe Check",
-    "Big Yikes",
+    "Aww Yea",
     "Bet",
-    "OK Boomer",
-    "Ain't nobody got time for that",
-    "Guess I'll die",
-    "Send it!",
-    "It's a trap!",
-    "This ain't it, chief",
-    "Can't stop, won't stop",
-    "Get rekt",
-    "Zero chill",
-    "Me, an intellectual",
     "Big brain time",
-    "Oh lawd he comin'",
-    "It do be like that sometimes",
-    "Yikes forever",
-    "Weird champ",
-    "Sorry, not sorry",
-    "Oof",
-    "I see what you did there",
-    "Plot twist",
-    "Just vibin'",
-    "High key",
-    "Low key",
-    "You love to see it",
+    "Big Mood",
     "Big oof",
-    "You're doing amazing, sweetie",
-    "Straight up",
-    "Whole vibe",
-    "Say what?",
-    "Issa vibe",
-    "I'm shooketh",
-    "Flexin on em",
-    "Woke up and chose violence",
-    "Catch these hands",
-    "Spillin' the tea",
-    "Vibing in the chat",
-    "Clownin",
-    "Major key",
+    "Big Yikes",
+    "Breakdancing Champ",
+    "Bro Do You Even Lift?",
+    "Bruh Moment",
     "Bruh",
+    "BYEEEEEE",
+    "Can't even",
+    "Can't stop, won't stop",
+    "Can't unsee",
+    "Catch me if you can",
+    "Catch these hands",
+    "Clownin",
+    "come at me bro",
+    "Cringe",
+    "Cursed Image",
+    "Delete This",
+    "Demure",
+    "Derp",
+    "Do You Like My Sword",
     "Don't @ me",
-    "No chill",
-    "This is sus",
-    "SUS",
+    "don't talk to me or my son ever again",
+    "Fallin for u",
+    "Family Reunion",
+    "Flexin on em",
+    "Forever Alone",
+    "Friendship is Magic",
+    "Get out of my head",
+    "Get rekt",
+    "Gold Medal Winner",
+    "Goofy",
+    "GOTTA LOVE BAKED BEANS",
+    "Guess I'll die",
+    "Haters Gonna Hate",
+    "he chonk",
+    "He Protec, but he also Attac",
+    "HELP ME",
+    "Here we go again",
+    "High key",
+    "Howdy",
+    "I Can't Believe You've Done This",
+    "I Can't Unsee This",
+    "i guess we doin",
+    "I hate it here",
+    "I Only Cried For 20 Minutes",
+    "I see what you did there",
+    "I want to speak to your manager!",
+    "I'm a box",
+    "I'm a cutie",
+    "I'm baby",
+    "I'm in danger",
+    "I'm shooketh",
+    "I'm so skibidi",
+    "Ight, I'mma head out",
+    "Issa vibe",
+    "It do be like that sometimes",
+    "It was inevitable",
+    "It's a trap!",
+    "It's over 9000!",
+    "Just Lost My Dawg",
+    "Just vibin'",
+    "Let that sink in",
+    "LITERALLY ME",
+    "Low key",
+    "Major key",
+    "Maximum Overdrive",
+    "Me, an intellectual",
+    "MOAR!",
+    "mom come pick me up",
+    "Mood",
+    "Mother",
+    "My disappointment is immeasurable",
+    "My Dream",
     "Nah fam",
+    "Nailed it",
+    "No Cap",
+    "No chill",
+    "No Maidens?",
+    "No, This Is Patrick",
+    "Nobody:...",
+    "Noice",
+    "Not Again!",
     "Not like this",
-    "Can't unsee"
+    "Not today, Satan",
+    "Oh lawd he comin'",
+    "Oh no baby, what is you doing?",
+    "OK Boomer",
+    "One does not simply...",
+    "Oof",
+    "Please help me",
+    "Plot twist",
+    "poor lil guy",
+    "Poyo",
+    "Ratatouille",
+    "Rats!",
+    "Say what?",
+    "See ya tomorrow",
+    "Send it!",
+    "Sending Good Vibes",
+    "Shake it. Don't break it.",
+    "Shook",
+    "Sorry, not sorry",
+    "Spillin' the tea",
+    "Straight up",
+    "SUS",
+    "Take me tubing!",
+    "TEETH",
+    "Thanks, I Hate It",
+    "Thas Tough",
+    "That's a lotta damage",
+    "That's Hot",
+    "The Guy From Fortnite?",
+    "the legend",
+    "Theyre in the walls",
+    "This ain't it, chief",
+    "This is a nightmare",
+    "This Is Fine",
+    "THIS IS FINE",
+    "This is my life",
+    "This is my weekend look",
+    "This is Ohio",
+    "This is sus",
+    "This is the ideal male body",
+    "This is where the fun begins",
+    "Time is irrelevant",
+    "Unexpected Item in Bagging Area",
+    "UwU",
+    "Vibe Check",
+    "Vibing in the chat",
+    "Wait, what?",
+    "wat?",
+    "We Stan",
+    "Weird champ",
+    "Weird Flex But Okay",
+    "Welp",
+    "when u hear a noise at night",
+    "When will you learn?",
+    "When you realize...",
+    "Who Put You on the Planet?",
+    "Whole vibe",
+    "Why am I like this?",
+    "Why are we here, just to suffer?",
+    "Why though?",
+    "Woke up and chose violence",
+    "Y'all Got Any More Of That?",
+    "Yeeeee Haw!",
+    "Yeet",
+    "Yikes forever",
+    "You had one job",
+    "You love to see it",
+    "You Serve",
+    "You're doing amazing, sweetie",
+    "Zero chill",
 ];
 
 function preload() {
-  // Load all images from the filenames array
-  for (let i = 0; i < imageFilenames.length; i++) {
-    images.push(loadImage('images/' + imageFilenames[i]));
-  }
+    // Load all images from the filenames array
+    for (let i = 0; i < imageFilenames.length; i++) {
+        images.push(loadImage('images/' + imageFilenames[i]));
+    }
 
 
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  maxTextWidth = width / 2;
-  maxImageSize = width / 2;
-  if(height < maxImageSize){
-    maxTextWidth = height * 0.9;
-    maxImageSize = height * 0.9;
-  }
-  background(255);
-  makeRandomShirt(0)
-  makeRandomShirt(maxImageSize)
-  let leftButton = createButton('VOTE LEFT');
-  leftButton.position(maxImageSize *0.46, maxImageSize*0.975);
-  leftButton.mousePressed(voteLeft);
-  let rightButton = createButton('VOTE RIGHT');
-  rightButton.position(maxImageSize *1.46, maxImageSize*0.975);
-  rightButton.mousePressed(voteRight);
-  noLoop();
+    createCanvas(windowWidth, windowHeight);
+    maxTextWidth = width / 2;
+    maxImageSize = width / 2;
+    if (height < maxImageSize) {
+        maxTextWidth = height * 0.9;
+        maxImageSize = height * 0.9;
+    }
+    background(255);
+    makeRandomShirt(0)
+    makeRandomShirt(maxImageSize)
+    let leftButton = createButton('VOTE LEFT');
+    leftButton.position(maxImageSize * 0.46, maxImageSize * 0.975);
+    leftButton.mousePressed(voteLeft);
+    let rightButton = createButton('VOTE RIGHT');
+    rightButton.position(maxImageSize * 1.46, maxImageSize * 0.975);
+    rightButton.mousePressed(voteRight);
+    noLoop();
 }
 
-function voteRight(){
+function voteRight() {
     makeRandomShirt(0)
 }
-function voteLeft(){
+function voteLeft() {
     makeRandomShirt(maxImageSize)
 }
 
-function makeRandomShirt(topLeftCorner){
+function makeRandomShirt(topLeftCorner) {
     // Randomly select an image and a caption
-  currentIndex = int(random(images.length));
-  img = images[currentIndex];
-  captionText = random(captions);
-  
-  if(random() < 0.25){
-    captionText = captionText.toUpperCase(); // ALL CAPS
-  } 
-  if(random() < 0.25){
-    captionText = captionText.toLowerCase(); 
-  } 
-  if(random() < 0.25){
-    captionText = toMockingText(captionText);
-  }
-  
-  // Display the image and caption
-  imageMode(CENTER);
-  // Resize the image to fit within the 700x700 area
-  let resizedImg = resizeImage(img, maxImageSize, maxImageSize);
-  
-  // Display the resized image
-  imageMode(CENTER);
-  image(resizedImg, topLeftCorner + maxImageSize / 2, maxImageSize/2);
-  
-  // Adjust text size to fit within the canvas
-  textAlign(CENTER, CENTER);
-  let textSizeValue = calculateTextSize(captionText, maxTextWidth);
-  textStyle(BOLD);
-  stroke(255);
-  strokeWeight(8);
-  textSize(textSizeValue);
-  fill(0);
-  text(captionText, topLeftCorner + maxImageSize / 2, maxImageSize*0.75);
+    currentIndex = int(random(images.length));
+    img = images[currentIndex];
+    captionText = random(captions);
+
+    if (random() < 0.25) {
+        captionText = captionText.toUpperCase(); // ALL CAPS
+    }
+    if (random() < 0.25) {
+        captionText = captionText.toLowerCase();
+    }
+    if (random() < 0.25) {
+        captionText = toMockingText(captionText);
+    }
+
+    // Display the image and caption
+    imageMode(CENTER);
+    // Resize the image to fit within the 700x700 area
+    let resizedImg = resizeImage(img, maxImageSize, maxImageSize);
+
+    // Display the resized image
+    imageMode(CENTER);
+    image(resizedImg, topLeftCorner + maxImageSize / 2, maxImageSize / 2);
+
+    // Adjust text size to fit within the canvas
+    textAlign(CENTER, CENTER);
+    let textSizeValue = calculateTextSize(captionText, maxTextWidth);
+    textStyle(BOLD);
+    stroke(255);
+    strokeWeight(8);
+    textSize(textSizeValue);
+    fill(0);
+    text(captionText, topLeftCorner + maxImageSize / 2, maxImageSize * 0.75);
 }
 
 function calculateTextSize(text, maxWidth) {
     let size = 100; // Start with a default size
     textSize(size);
-    
-    // Increase or decrease text size until it fits within maxWidth
-    while (textWidth(text) > maxWidth*0.55) {
-      size *= 0.9; // Decrease font size
-      textSize(size);
-    }
-    
-    return size;
-  }
 
-  function resizeImage(img, maxWidth, maxHeight) {
+    // Increase or decrease text size until it fits within maxWidth
+    while (textWidth(text) > maxWidth * 0.55) {
+        size *= 0.9; // Decrease font size
+        textSize(size);
+    }
+
+    return size;
+}
+
+function resizeImage(img, maxWidth, maxHeight) {
     let imgWidth = img.width;
     let imgHeight = img.height;
-    
+
     let newWidth = maxWidth;
     let newHeight = maxHeight;
-  
+
     // Calculate new dimensions to maintain aspect ratio
     if (imgWidth > imgHeight) {
-      newHeight = Math.floor((maxWidth / imgWidth) * imgHeight);
-      newWidth = maxWidth;
+        newHeight = Math.floor((maxWidth / imgWidth) * imgHeight);
+        newWidth = maxWidth;
     } else {
-      newWidth = Math.floor((maxHeight / imgHeight) * imgWidth);
-      newHeight = maxHeight;
+        newWidth = Math.floor((maxHeight / imgHeight) * imgWidth);
+        newHeight = maxHeight;
     }
-    
+
     // Ensure the new dimensions are within the max size
     newWidth = constrain(newWidth, 0, maxWidth);
     newHeight = constrain(newHeight, 0, maxHeight);
-    
+
     // Create a new image with the calculated dimensions
     let resizedImg = createImage(newWidth, newHeight);
     resizedImg.copy(img, 0, 0, imgWidth, imgHeight, 0, 0, newWidth, newHeight);
     return resizedImg;
-  }
+}
 
-  function toMockingText(text){
+function toMockingText(text) {
     let result = "";
     let letterCount = 0;
-    for(let i=0; i<text.length; i++){
-      if(letterCount%2==0){
-        result += text.charAt(i).toLowerCase();
-      } else {
-        result += text.charAt(i).toUpperCase();
-      }
-      if(text.charAt(i) != " "){
-        letterCount++;
-      }
+    for (let i = 0; i < text.length; i++) {
+        if (letterCount % 2 == 0) {
+            result += text.charAt(i).toLowerCase();
+        } else {
+            result += text.charAt(i).toUpperCase();
+        }
+        if (text.charAt(i) != " ") {
+            letterCount++;
+        }
     }
     return result;
-  }
+}
