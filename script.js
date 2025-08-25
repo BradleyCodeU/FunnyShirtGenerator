@@ -96,10 +96,16 @@ const imageFilenames = [
     "hubgdad (12).png",
     "hubgdad (13).png",
     "hubgdad (14).png",
-    "hubgdad (1).jpg",
+    "hubgdad (15).png",
     "aicc (1).png",
     "aicc (2).png",
     "aicc (3).png",
+    "aicc (4).png",
+    "aicc (5).png",
+    "aicc (6).png",
+    "aicc (7).png",
+    "aicc (8).png",
+
 
 ];
 
