@@ -79,7 +79,25 @@ const imageFilenames = [
     "secondPeriod14.png",
     "secondPeriod15.png",
     "secondPeriod16.png",
-    "secondPeriod17.png"
+    "secondPeriod17.png",
+    "hubgdad (1).png",
+    "hubgdad (2).png",
+    "hubgdad (3).png",
+    "hubgdad (4).png",
+    "hubgdad (5).png",
+    "hubgdad (6).png",
+    "hubgdad (7).png",
+    "hubgdad (8).png",
+    "hubgdad (9).png",
+    "hubgdad (10).png",
+    "hubgdad (11).png",
+    "hubgdad (12).png",
+    "hubgdad (13).png",
+    "hubgdad (1).jpg",
+    "aicc (1).png",
+    "aicc (2).png",
+    "aicc (3).png",
+
 ];
 
 const captions = [
