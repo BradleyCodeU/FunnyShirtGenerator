@@ -95,6 +95,7 @@ const imageFilenames = [
     "hubgdad (11).png",
     "hubgdad (12).png",
     "hubgdad (13).png",
+    "hubgdad (14).png",
     "hubgdad (1).jpg",
     "aicc (1).png",
     "aicc (2).png",
