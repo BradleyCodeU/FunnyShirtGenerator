@@ -105,6 +105,7 @@ const imageFilenames = [
     "aicc (6).png",
     "aicc (7).png",
     "aicc (8).png",
+    "aicc (9).png",
 
 
 ];
