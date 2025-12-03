@@ -323,10 +323,12 @@ function getText(captions){
     let firstHalfArray = random(captions).split(" ");
     let secondHalfArray = random(captions).split(" ");
         // delete half
-    firstHalfArray.splice(Math.floor(firstHalfArray.length*0.5), Math.floor(firstHalfArray.length*0.5));
-    
-    secondHalfArray.splice(0, Math.floor(secondHalfArray.length*0.5));
+        console.log(firstHalfArray);
+    firstHalfArray.splice(Math.floor(firstHalfArray.length*0.5), Math.ceil(firstHalfArray.length*0.5));
     console.log(firstHalfArray);
+    console.log(secondHalfArray);
+    secondHalfArray.splice(0, Math.floor(secondHalfArray.length*0.5));
+    
     console.log(secondHalfArray);
     //return random(captions);
     return firstHalfArray.join(" ") + " " + secondHalfArray.join(" ");
