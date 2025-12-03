@@ -319,11 +319,24 @@ function voteLeft() {
     makeRandomShirt(maxImageSize)
 }
 
+function getText(captions){
+    let firstHalfArray = random(captions).split(" ");
+    let secondHalfArray = random(captions).split(" ");
+        // delete half
+    firstHalfArray.splice(Math.floor(firstHalfArray.length*0.5), Math.floor(firstHalfArray.length*0.5));
+    
+    secondHalfArray.splice(0, Math.floor(secondHalfArray.length*0.5));
+    console.log(firstHalfArray);
+    console.log(secondHalfArray);
+    //return random(captions);
+    return firstHalfArray.join(" ") + " " + secondHalfArray.join(" ");
+}
+
 function makeRandomShirt(topLeftCorner) {
     // Randomly select an image and a caption
     currentIndex = int(random(images.length));
     img = images[currentIndex];
-    captionText = random(captions);
+    captionText = getText(captions);
 
     if (random() < 0.25) {
         captionText = captionText.toUpperCase(); // ALL CAPS
