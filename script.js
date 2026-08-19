@@ -1,6 +1,6 @@
 let images = [];
-let maxTextWidth = 700; // Maximum width for the text
-let maxImageSize = 700; // Maximum width and height for the image
+let maxTextWidth = 700; 
+let maxImageSize = 700; 
 let img;
 let captionText = '';
 let currentIndex;
@@ -11,16 +11,19 @@ const GameState = Object.freeze({
     IDLE: 'IDLE',
     ANIM_LEFT_WIN: 'ANIM_LEFT_WIN',
     ANIM_RIGHT_WIN: 'ANIM_RIGHT_WIN',
-    DISPLAY_SCOREBOARD: 'DISPLAY_SCOREBOARD' // New state
+    DISPLAY_SCOREBOARD: 'DISPLAY_SCOREBOARD',
+    SINGLE_SHIRT_VIEW: 'SINGLE_SHIRT_VIEW'
 });
 
 let scoreboard = {};
 let totalVotes = 0;
-let leftButton, rightButton, continueButton;
+let leftButton, rightButton, continueButton, backButton;
 let currentState = GameState.IDLE;
 const ANIM_DURATION = 500;
 let leftShirt = null;
 let rightShirt = null;
+let selectedShirtData = null;
+const SCOREBOARD_MAX = 5;
 
 const imageFilenames = [
     "aicc01.png",
@@ -540,6 +543,15 @@ async function setup() {
         rightButton.show();
     });
     continueButton.hide();
+
+    backButton = createButton('BACK');
+    backButton.position(width / 2 - 30, height * 0.9);
+    backButton.mousePressed(() => {
+        currentState = GameState.DISPLAY_SCOREBOARD;
+        backButton.hide();
+        continueButton.show(); 
+    });
+    backButton.hide();
 }
 
 function draw() {
@@ -555,6 +567,52 @@ function draw() {
     else if (currentState === GameState.DISPLAY_SCOREBOARD) {
         showScoreboard()
     }
+    else if (currentState === GameState.SINGLE_SHIRT_VIEW) {
+        showSingleShirtView()
+    }
+}
+
+function mousePressed() {
+    if (currentState === GameState.DISPLAY_SCOREBOARD) {
+        let sortedScores = Object.entries(scoreboard).sort((a, b) => b[1] - a[1]);
+        let numItems = Math.min(15, sortedScores.length);
+        let thumbSize = 80;
+
+        for (let i = 0; i < numItems; i++) {
+            // Replicate grid math exactly
+            let col = i % 3;
+            let row = Math.floor(i / 3);
+            let xPos = (width / 4) * (col + 1);
+            let yPos = 130 + (row * (thumbSize + 45));
+
+            // Calculate boundaries around the center point
+            let leftEdge = xPos - (thumbSize / 2);
+            let rightEdge = xPos + (thumbSize / 2);
+            let topEdge = yPos - (thumbSize / 2);
+            let bottomEdge = yPos + (thumbSize / 2);
+
+            if (mouseX >= leftEdge && mouseX <= rightEdge && 
+                mouseY >= topEdge && mouseY <= bottomEdge) {
+                
+                let [key, score] = sortedScores[i];
+                let parts = key.split('|');
+                let imgIndex = imageFilenames.indexOf(parts[1]);
+                
+                selectedShirtData = {
+                    img: resizeImage(images[imgIndex], maxImageSize, maxImageSize),
+                    text: parts[0],
+                    textSize: calculateTextSize(parts[0], maxTextWidth),
+                    x: width / 2 - maxImageSize / 2, 
+                    votes: score
+                };
+                
+                currentState = GameState.SINGLE_SHIRT_VIEW;
+                continueButton.hide();
+                backButton.show();
+                break; 
+            }
+        }
+    }
 }
 
 function showScoreboard(){
@@ -565,17 +623,70 @@ function showScoreboard(){
     textSize(40);
     text("SCOREBOARD", width / 2, 50);
     
-    textSize(20);
-    let yPos = 120;
-    
-    // Sort and display the top entries
     let sortedScores = Object.entries(scoreboard).sort((a, b) => b[1] - a[1]);
+    let thumbSize = 80;
     
-    for (let i = 0; i < Math.min(10, sortedScores.length); i++) {
+    // Loop through Top 15 (3 cols x 5 rows)
+    for (let i = 0; i < Math.min(15, sortedScores.length); i++) {
         let [key, score] = sortedScores[i];
-        text(`${score} Votes: ${key}`, width / 2, yPos);
-        yPos += 40;
+        let parts = key.split('|');
+        
+        // Calculate Grid Position
+        let col = i % 3;
+        let row = Math.floor(i / 3);
+        
+        // Space evenly at 25%, 50%, and 75% of canvas width
+        let xPos = (width / 4) * (col + 1); 
+        let yPos = 130 + (row * (thumbSize + 45)); 
+        
+        let imgIndex = imageFilenames.indexOf(parts[1]);
+        let thumbnailImg = images[imgIndex];
+        
+        // Draw Thumbnail
+        push();
+        translate(xPos, yPos); 
+        imageMode(CENTER);
+        if (thumbnailImg) image(thumbnailImg, 0, 0, thumbSize, thumbSize);
+        
+        // Draw Caption on Thumbnail
+        textAlign(CENTER, CENTER);
+        textStyle(BOLD);
+        stroke(255);
+        strokeWeight(4);
+        fill(0);
+        let miniTextSize = calculateTextSize(parts[0], thumbSize * 0.9);
+        textSize(miniTextSize);
+        text(parts[0], 0, thumbSize * 0.25);
+        pop();
+        
+        // Draw Simplified Vote Score (Centered below thumbnail)
+        push();
+        textAlign(CENTER, CENTER);
+        fill(100); 
+        noStroke();
+        textSize(16);
+        textStyle(BOLD);
+        text(`${score}⭐`, xPos, yPos + (thumbSize / 2) + 15);
+        pop();
     }
+    return;
+}
+
+function showSingleShirtView(){
+    background(240);
+    
+    // Draw the full-size shirt
+    drawShirt(selectedShirtData);
+    
+    // Draw the stats below the shirt
+    textAlign(CENTER, CENTER);
+    fill(0);
+    noStroke();
+    
+    textSize(40);
+    text("Total Votes: " + selectedShirtData.votes, width / 2, maxImageSize + 60);
+    
+    // You can easily add more stats here, like rank or win percentage!
     return;
 }
 
