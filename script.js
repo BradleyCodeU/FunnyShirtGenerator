@@ -1,114 +1,127 @@
 let images = [];
 let maxTextWidth = 700; // Maximum width for the text
 let maxImageSize = 700; // Maximum width and height for the image
-
 let img;
 let captionText = '';
 let currentIndex;
+let animating = false;
+let animStartTime = 0;
+let votedSide = "";
+const GameState = Object.freeze({
+    IDLE: 'IDLE',
+    ANIM_LEFT_WIN: 'ANIM_LEFT_WIN',
+    ANIM_RIGHT_WIN: 'ANIM_RIGHT_WIN',
+    DISPLAY_SCOREBOARD: 'DISPLAY_SCOREBOARD' // New state
+});
 
-    // "img(1).jpg",
-    // "img(1).PNG",
-    // "img(10).png",
-    // "img(11).png",
-    // "img(12).png",
-    // "img(13).png",
-    // "img(14).png",
-    // "img(15).png",
-    // "img(16).png",
-    // "img(17).png",
-    // "img(18).png",
-    // "img(2).jpg",
-    // "img(2).PNG",
-    // "img(3).PNG",
-    // "img(4).PNG",
-    // "img(5).PNG",
-    // "img(6).PNG",
-    // "img(7).PNG",
-    // "img(8).png",
-    // "img(9).png",
-    // "seventhPeriod(1).jpg",
-    // "seventhPeriod(1).PNG",
-    // "seventhPeriod(10).PNG",
-    // "seventhPeriod(11).png",
-    // "seventhPeriod(12).png",
-    // "seventhPeriod(13).png",
-    // "seventhPeriod(14).png",
-    // "seventhPeriod(15).png",
-    // "seventhPeriod(16).png",
-    // "seventhPeriod(17).png",
-    // "seventhPeriod(18).png",
-    // "seventhPeriod(19).png",
-    // "seventhPeriod(2).jpg",
-    // "seventhPeriod(2).PNG",
-    // "seventhPeriod(20).png",
-    // "seventhPeriod(21).png",
-    // "seventhPeriod(3).PNG",
-    // "seventhPeriod(4).PNG",
-    // "seventhPeriod(5).PNG",
-    // "seventhPeriod(6).PNG",
-    // "seventhPeriod(7).PNG",
-    // "seventhPeriod(8).PNG",
-    // "seventhPeriod(9).PNG",
-    // "eighth(1).jpg",
-    // "eighth(1).PNG",
-    // "eighth(10).png",
-    // "eighth(2).jpg",
-    // "eighth(2).PNG",
-    // "eighth(3).jpg",
-    // "eighth(3).PNG",
-    // "eighth(4).PNG",
-    // "eighth(5).PNG",
-    // "eighth(6).png",
-    // "eighth(7).png",
-    // "eighth(8).png",
-    // "eighth(9).png",
-    // "secondPeriod1.png",
-    // "secondPeriod2.png",
-    // "secondPeriod3.png",
-    // "secondPeriod4.png",
-    // "secondPeriod5.png",
-    // "secondPeriod6.png",
-    // "secondPeriod7.png",
-    // "secondPeriod8.png",
-    // "secondPeriod9.png",
-    // "secondPeriod10.png",
-    // "secondPeriod11.png",
-    // "secondPeriod12.png",
-    // "secondPeriod13.png",
-    // "secondPeriod14.png",
-    // "secondPeriod15.png",
-    // "secondPeriod16.png",
-    // "secondPeriod17.png",
+let scoreboard = {};
+let totalVotes = 0;
+let leftButton, rightButton, continueButton;
+let currentState = GameState.IDLE;
+const ANIM_DURATION = 500;
+let leftShirt = null;
+let rightShirt = null;
 
 const imageFilenames = [
-
-    "hubgdad (1).png",
-    "hubgdad (2).png",
-    "hubgdad (3).png",
-    "hubgdad (4).png",
-    "hubgdad (5).png",
-    "hubgdad (6).png",
-    "hubgdad (7).png",
-    "hubgdad (8).png",
-    "hubgdad (9).png",
-    "hubgdad (10).png",
-    "hubgdad (11).png",
-    "hubgdad (12).png",
-    "hubgdad (13).png",
-    "hubgdad (14).png",
-    "hubgdad (15).png",
-    "hubgdad (16).png",
-    "hubgdad (17).png",
-    "aicc (1).png",
-    "aicc (2).png",
-    "aicc (3).png",
-    "aicc (4).png",
-    "aicc (5).png",
-    "aicc (6).png",
-    "aicc (7).png",
-    "aicc (8).png",
-    "aicc (9).png",
-
+    "aicc01.png",
+    "aicc02.png",
+    "aicc03.png",
+    "aicc04.png",
+    "aicc05.png",
+    "aicc06.png",
+    "aicc07.png",
+    "aicc08.png",
+    "aicc09.png",
+    "eighth01.png",
+    "eighth02.png",
+    "eighth03.png",
+    "eighth04.png",
+    "eighth05.png",
+    "eighth06.png",
+    "eighth07.png",
+    "eighth08.png",
+    "eighth09.png",
+    "eighth10.png",
+    "eighth11.png",
+    "eighth12.png",
+    "eighth13.png",
+    "hubgdad01.png",
+    "hubgdad02.png",
+    "hubgdad03.png",
+    "hubgdad04.png",
+    "hubgdad05.png",
+    "hubgdad06.png",
+    "hubgdad07.png",
+    "hubgdad08.png",
+    "hubgdad09.png",
+    "hubgdad10.png",
+    "hubgdad11.png",
+    "hubgdad12.png",
+    "hubgdad13.png",
+    "hubgdad14.png",
+    "hubgdad15.png",
+    "hubgdad16.png",
+    "hubgdad17.png",
+"img01.png",
+"img02.png",
+"img03.png",
+"img04.png",
+"img05.png",
+"img06.png",
+"img07.png",
+"img08.png",
+"img09.png",
+"img10.png",
+"img11.png",
+"img12.png",
+"img13.png",
+"img14.png",
+"img15.png",
+"img16.png",
+"img17.png",
+"img18.png",
+"img19.png",
+"img20.png",
+"secondPeriod01.png",
+"secondPeriod02.png",
+"secondPeriod03.png",
+"secondPeriod04.png",
+"secondPeriod05.png",
+"secondPeriod06.png",
+"secondPeriod07.png",
+"secondPeriod08.png",
+"secondPeriod09.png",
+"secondPeriod10.png",
+"secondPeriod11.png",
+"secondPeriod12.png",
+"secondPeriod13.png",
+"secondPeriod14.png",
+"secondPeriod15.png",
+"secondPeriod16.png",
+"secondPeriod17.png",
+"seventhPeriod01.png",
+"seventhPeriod02.png",
+"seventhPeriod03.png",
+"seventhPeriod04.png",
+"seventhPeriod05.png",
+"seventhPeriod06.png",
+"seventhPeriod07.png",
+"seventhPeriod08.png",
+"seventhPeriod09.png",
+"seventhPeriod10.png",
+"seventhPeriod11.png",
+"seventhPeriod12.png",
+"seventhPeriod13.png",
+"seventhPeriod14.png",
+"seventhPeriod15.png",
+"seventhPeriod16.png",
+"seventhPeriod17.png",
+"seventhPeriod18.png",
+"seventhPeriod19.png",
+"seventhPeriod20.png",
+"seventhPeriod21.png",
+"seventhPeriod22.png",
+"seventhPeriod23.png",
 
 ];
 
@@ -465,40 +478,167 @@ const captions = [
     "Zero Plans, All Vibes",
 ];
 
-function preload() {
-    // Load all images from the filenames array
-    for (let i = 0; i < imageFilenames.length; i++) {
-        images.push(loadImage('images/' + imageFilenames[i]));
-    }
+// function preload() {
+//     // Load all images from the filenames array
+//     for (let i = 0; i < imageFilenames.length; i++) {
+//         //images.push(loadImage('images/' + imageFilenames[i]));
+//     }
 
 
-}
+// }
 
-function setup() {
+// function setup() {
+//     createCanvas(windowWidth, windowHeight);
+//     maxTextWidth = width / 2;
+//     maxImageSize = width / 2;
+//     if (height < maxImageSize) {
+//         maxTextWidth = height * 0.9;
+//         maxImageSize = height * 0.9;
+//     }
+//     background(255);
+//     leftShirt = generateShirtData(0);
+//     rightShirt = generateShirtData(maxImageSize);
+//     let leftButton = createButton('VOTE LEFT');
+//     leftButton.position(maxImageSize * 0.46, maxImageSize * 0.975);
+//     leftButton.mousePressed(voteLeft);
+//     let rightButton = createButton('VOTE RIGHT');
+//     rightButton.position(maxImageSize * 1.46, maxImageSize * 0.975);
+//     rightButton.mousePressed(voteRight);
+// }
+
+async function setup() {
+    // Await all images simultaneously before continuing
+    images = await Promise.all(
+        imageFilenames.map(filename => loadImage('images/' + filename))
+    );
+
     createCanvas(windowWidth, windowHeight);
+    
     maxTextWidth = width / 2;
     maxImageSize = width / 2;
     if (height < maxImageSize) {
         maxTextWidth = height * 0.9;
         maxImageSize = height * 0.9;
     }
-    background(255);
-    makeRandomShirt(0)
-    makeRandomShirt(maxImageSize)
-    let leftButton = createButton('VOTE LEFT');
+    
+    leftShirt = generateShirtData(0);
+    rightShirt = generateShirtData(maxImageSize);
+    
+    leftButton = createButton('VOTE LEFT');
     leftButton.position(maxImageSize * 0.46, maxImageSize * 0.975);
     leftButton.mousePressed(voteLeft);
-    let rightButton = createButton('VOTE RIGHT');
+    
+    rightButton = createButton('VOTE RIGHT');
     rightButton.position(maxImageSize * 1.46, maxImageSize * 0.975);
     rightButton.mousePressed(voteRight);
-    noLoop();
+    continueButton = createButton('CONTINUE');
+    continueButton.position(width / 2 - 50, height * 0.9);
+    continueButton.mousePressed(() => {
+        currentState = GameState.IDLE;
+        continueButton.hide();
+        leftButton.show();
+        rightButton.show();
+    });
+    continueButton.hide();
+}
+
+function draw() {
+    background(255);
+    if (currentState === GameState.IDLE) {
+        drawShirt(leftShirt);
+        drawShirt(rightShirt);
+        return;
+    }
+    else if (currentState === GameState.ANIM_LEFT_WIN || currentState === GameState.ANIM_RIGHT_WIN){
+        showAnimation()
+    }
+    else if (currentState === GameState.DISPLAY_SCOREBOARD) {
+        showScoreboard()
+    }
+}
+
+function showScoreboard(){
+    background(240);
+    textAlign(CENTER, CENTER);
+    fill(0);
+    noStroke();
+    textSize(40);
+    text("SCOREBOARD", width / 2, 50);
+    
+    textSize(20);
+    let yPos = 120;
+    
+    // Sort and display the top entries
+    let sortedScores = Object.entries(scoreboard).sort((a, b) => b[1] - a[1]);
+    
+    for (let i = 0; i < Math.min(10, sortedScores.length); i++) {
+        let [key, score] = sortedScores[i];
+        text(`${score} Votes: ${key}`, width / 2, yPos);
+        yPos += 40;
+    }
+    return;
+}
+
+function showAnimation(){
+    let elapsed = millis() - animStartTime;
+    let progress = constrain(elapsed / ANIM_DURATION, 0, 1);
+
+    if (currentState === GameState.ANIM_LEFT_WIN) {
+        drawShirt(leftShirt, 1, 30 * progress); // Glow left
+        drawShirt(rightShirt, 1 - progress, 0); // Shrink right
+
+        if (progress >= 1) {
+            rightShirt = generateShirtData(maxImageSize);
+            checkScoreboardTransition();
+        }
+    } 
+    else if (currentState === GameState.ANIM_RIGHT_WIN) {
+        drawShirt(leftShirt, 1 - progress, 0); // Shrink left
+        drawShirt(rightShirt, 1, 30 * progress); // Glow right
+
+        if (progress >= 1) {
+            leftShirt = generateShirtData(0);
+            checkScoreboardTransition();
+        }
+    }
+}
+
+function checkScoreboardTransition() {
+    if (totalVotes % 10 === 0) {
+        currentState = GameState.DISPLAY_SCOREBOARD;
+        leftButton.hide();
+        rightButton.hide();
+        continueButton.show();
+    } else {
+        currentState = GameState.IDLE;
+    }
+}
+
+function recordVote(winningShirt) {
+    let protocolKey = winningShirt.text + "|" + winningShirt.filename;
+    
+    if (!scoreboard[protocolKey]) {
+        scoreboard[protocolKey] = 0;
+    }
+    scoreboard[protocolKey]++;
+    totalVotes++;
+}
+
+function voteLeft() {
+    if (currentState === GameState.IDLE) {
+        recordVote(leftShirt);
+        
+        currentState = GameState.ANIM_LEFT_WIN;
+        animStartTime = millis();
+    }
 }
 
 function voteRight() {
-    makeRandomShirt(0)
-}
-function voteLeft() {
-    makeRandomShirt(maxImageSize)
+    if (currentState === GameState.IDLE) {
+        recordVote(rightShirt);
+        currentState = GameState.ANIM_RIGHT_WIN;
+        animStartTime = millis();
+    }
 }
 
 function getText(captions){
@@ -520,40 +660,55 @@ function getText(captions){
     return result;
 }
 
-function makeRandomShirt(topLeftCorner) {
-    // Randomly select an image and a caption
-    currentIndex = int(random(images.length));
-    img = images[currentIndex];
-    captionText = getText(captions);
+function generateShirtData(xPos) {
+    let index = int(random(images.length));
+    let rawText = getText(captions);
+    
+    // Apply your uppercase/lowercase/mocking text logic here
+    
+    return {
+        img: resizeImage(images[index], maxImageSize, maxImageSize),
+        filename: imageFilenames[index], // Store for the protocol
+        text: rawText,
+        textSize: calculateTextSize(rawText, maxTextWidth),
+        x: xPos
+    };
+}
 
-    if (random() < 0.25) {
-        captionText = captionText.toUpperCase(); // ALL CAPS
-    }
-    if (random() < 0.25) {
-        captionText = captionText.toLowerCase();
-    }
-    if (random() < 0.25) {
-        captionText = toMockingText(captionText);
+function drawShirt(shirtData, scaleMod = 1, glow = 0) {
+    push();
+    translate(shirtData.x + maxImageSize / 2, maxImageSize / 2);
+    scale(scaleMod);
+    
+    // Glow effect
+    if (glow > 0) {
+        drawingContext.shadowBlur = glow;
+        drawingContext.shadowColor = 'green';
+        
+        // Calculate progress (glow maxes out at 30)
+        let progress = glow / 30; 
+        
+        // Blend from white (normal) to gold
+        let startColor = color(255, 255, 255);
+        let goldColor = color(100, 255, 100); 
+        let currentTint = lerpColor(startColor, goldColor, progress);
+        
+        tint(currentTint);
     }
 
-    // Display the image and caption
     imageMode(CENTER);
-    // Resize the image to fit within the 700x700 area
-    let resizedImg = resizeImage(img, maxImageSize, maxImageSize);
-
-    // Display the resized image
-    imageMode(CENTER);
-    image(resizedImg, topLeftCorner + maxImageSize / 2, maxImageSize / 2);
-
-    // Adjust text size to fit within the canvas
+    image(shirtData.img, 0, 0);
+    
+    drawingContext.shadowBlur = 0; // Reset shadow for text
+    
     textAlign(CENTER, CENTER);
-    let textSizeValue = calculateTextSize(captionText, maxTextWidth);
     textStyle(BOLD);
     stroke(255);
     strokeWeight(8);
-    textSize(textSizeValue);
+    textSize(shirtData.textSize);
     fill(0);
-    text(captionText, topLeftCorner + maxImageSize / 2, maxImageSize * 0.75);
+    text(shirtData.text, 0, maxImageSize * 0.25);
+    pop();
 }
 
 function calculateTextSize(text, maxWidth) {
