@@ -589,6 +589,39 @@ function draw() {
     }
 }
 
+function getShirtFromScoreboard(index){
+    let sortedScores = Object.entries(scoreboard).sort((a, b) => b[1] - a[1]);
+    let numItems = Math.min(15, sortedScores.length);
+    if(numItems === 0){
+        return null;
+    }
+    let [key, score] = sortedScores[index];
+    let parts = key.split('|');
+    let imgIndex = imageFilenames.indexOf(parts[1]);
+    return {
+        img: resizeImage(images[imgIndex], maxImageSize, maxImageSize),
+        filename: imageFilenames[imgIndex],
+        text: parts[0],
+        textSize: calculateTextSize(parts[0], maxTextWidth),
+        x: width / 2 - maxImageSize / 2, 
+        votes: score
+    };
+}
+
+function getOldShirt(champShirt){
+    let scoreboardLength = Object.keys(scoreboard).length;
+    if(scoreboardLength < 10){
+        return null;
+    }
+    let index = Math.min(Math.floor(Math.random()*scoreboardLength), Math.floor(Math.random()*scoreboardLength));
+    let oldShirt = getShirtFromScoreboard(index);
+    if(oldShirt.filename === champShirt.filename){
+        return null;
+    }
+    return oldShirt;
+
+}
+
 function mousePressed() {
     if (currentState === GameState.DISPLAY_SCOREBOARD) {
         let sortedScores = Object.entries(scoreboard).sort((a, b) => b[1] - a[1]);
@@ -610,19 +643,7 @@ function mousePressed() {
 
             if (mouseX >= leftEdge && mouseX <= rightEdge && 
                 mouseY >= topEdge && mouseY <= bottomEdge) {
-                
-                let [key, score] = sortedScores[i];
-                let parts = key.split('|');
-                let imgIndex = imageFilenames.indexOf(parts[1]);
-                
-                selectedShirtData = {
-                    img: resizeImage(images[imgIndex], maxImageSize, maxImageSize),
-                    text: parts[0],
-                    textSize: calculateTextSize(parts[0], maxTextWidth),
-                    x: width / 2 - maxImageSize / 2, 
-                    votes: score
-                };
-                
+                selectedShirtData = getShirtFromScoreboard(i);
                 currentState = GameState.SINGLE_SHIRT_VIEW;
                 continueButton.hide();
                 backButton.show();
@@ -716,7 +737,17 @@ function showAnimation(){
         drawShirt(rightShirt, 1 - progress, 0); // Shrink right
 
         if (progress >= 1) {
-            rightShirt = generateShirtData(maxImageSize);
+            // 25% chance of reviving old shirt
+            if(Math.random() < 0.25){
+                rightShirt = getOldShirt(leftShirt);
+                rightShirt["x"] = maxImageSize;
+                if(!rightShirt){
+                    rightShirt = generateShirtData(maxImageSize);
+                }
+            } else {
+                rightShirt = generateShirtData(maxImageSize);
+            }
+            
             checkScoreboardTransition();
         }
     } 
@@ -725,7 +756,16 @@ function showAnimation(){
         drawShirt(rightShirt, 1, 30 * progress); // Glow right
 
         if (progress >= 1) {
-            leftShirt = generateShirtData(0);
+            if(Math.random() < 0.25){
+                leftShirt = getOldShirt(rightShirt);
+                leftShirt["x"] = 0;
+                if(!leftShirt){
+                    leftShirt = generateShirtData(0);
+                }
+            } else {
+                leftShirt = generateShirtData(0);
+            }
+
             checkScoreboardTransition();
         }
     }
@@ -756,7 +796,6 @@ function recordVote(winningShirt) {
 function voteLeft() {
     if (currentState === GameState.IDLE) {
         recordVote(leftShirt);
-        
         currentState = GameState.ANIM_LEFT_WIN;
         animStartTime = millis();
     }
@@ -793,14 +832,23 @@ function generateShirtData(xPos) {
     let index = int(random(images.length));
     let rawText = getText(captions);
     
-    // Apply your uppercase/lowercase/mocking text logic here
+    if (random() < 0.25) {
+        captionText = captionText.toUpperCase(); // ALL CAPS
+    }
+    if (random() < 0.25) {
+        captionText = captionText.toLowerCase();
+    }
+    if (random() < 0.25) {
+        captionText = toMockingText(captionText);
+    }
     
     return {
         img: resizeImage(images[index], maxImageSize, maxImageSize),
-        filename: imageFilenames[index], // Store for the protocol
+        filename: imageFilenames[index],
         text: rawText,
         textSize: calculateTextSize(rawText, maxTextWidth),
-        x: xPos
+        x: xPos,
+        votes: 0
     };
 }
 
@@ -894,3 +942,40 @@ function toMockingText(text) {
     }
     return result;
 }
+
+// function windowResized() {
+//     resizeCanvas(windowWidth, windowHeight);
+    
+//     maxTextWidth = width / 2;
+//     maxImageSize = width / 2;
+    
+//     if (height < maxImageSize) {
+//         maxTextWidth = height * 0.9;
+//         maxImageSize = height * 0.9;
+//     }
+
+//     // Reposition the UI Buttons
+//     if (leftButton && rightButton) {
+//         leftButton.position(maxImageSize * 0.46, maxImageSize * 0.975);
+//         rightButton.position(maxImageSize * 1.46, maxImageSize * 0.975);
+//     }
+    
+//     if (continueButton) {
+//         continueButton.position(width / 2 - 50, height * 0.9);
+//     }
+    
+//     if (backButton) {
+//         backButton.position(width / 2 - 30, height * 0.9);
+//     }
+
+//     // Re-align the Active Shirts
+//     if (leftShirt) {
+//         leftShirt.x = 0;
+//     }
+//     if (rightShirt) {
+//         rightShirt.x = maxImageSize;
+//     }
+//     if (selectedShirtData) {
+//         selectedShirtData.x = width / 2 - maxImageSize / 2;
+//     }
+// }
