@@ -737,13 +737,13 @@ function showAnimation(){
         drawShirt(rightShirt, 1 - progress, 0); // Shrink right
 
         if (progress >= 1) {
-            // 25% chance of reviving old shirt
-            if(Math.random() < 0.25){
+            // 20% chance of reviving old shirt
+            if(Math.random() < 0.2){
                 rightShirt = getOldShirt(leftShirt);
-                rightShirt["x"] = maxImageSize;
                 if(!rightShirt){
                     rightShirt = generateShirtData(maxImageSize);
                 }
+                rightShirt["x"] = maxImageSize;
             } else {
                 rightShirt = generateShirtData(maxImageSize);
             }
@@ -756,12 +756,12 @@ function showAnimation(){
         drawShirt(rightShirt, 1, 30 * progress); // Glow right
 
         if (progress >= 1) {
-            if(Math.random() < 0.25){
+            if(Math.random() < 0.2){
                 leftShirt = getOldShirt(rightShirt);
-                leftShirt["x"] = 0;
                 if(!leftShirt){
                     leftShirt = generateShirtData(0);
                 }
+                leftShirt["x"] = 0;
             } else {
                 leftShirt = generateShirtData(0);
             }
