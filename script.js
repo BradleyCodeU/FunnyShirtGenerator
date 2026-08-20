@@ -510,7 +510,7 @@ const captions = [
 // }
 
 async function setup() {
-    // Await all images simultaneously before continuing
+    loadSaveData();
     images = await Promise.all(
         imageFilenames.map(filename => loadImage('images/' + filename))
     );
@@ -552,6 +552,23 @@ async function setup() {
         continueButton.show(); 
     });
     backButton.hide();
+}
+
+function loadSaveData(){
+    let savedScoreboard = localStorage.getItem('teeKOScoreboard');
+    let savedTotalVotes = localStorage.getItem('teeKOTotalVotes');
+
+    if (savedScoreboard) {
+        scoreboard = JSON.parse(savedScoreboard);
+    }
+    if (savedTotalVotes) {
+        totalVotes = parseInt(savedTotalVotes);
+    }
+}
+
+function saveGame(){
+    localStorage.setItem('teeKOScoreboard', JSON.stringify(scoreboard));
+    localStorage.setItem('teeKOTotalVotes', totalVotes.toString());
 }
 
 function draw() {
@@ -733,6 +750,7 @@ function recordVote(winningShirt) {
     }
     scoreboard[protocolKey]++;
     totalVotes++;
+    saveGame();
 }
 
 function voteLeft() {
