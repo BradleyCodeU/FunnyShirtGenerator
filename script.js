@@ -644,7 +644,7 @@ function getShirtFromScoreboard(index) {
 
 function getOldShirt(champShirt){
     let scoreboardLength = Object.keys(scoreboard).length;
-    if(scoreboardLength < 10){
+    if(totalVotes < 10){
         return null;
     }
     let index = Math.min(Math.floor(Math.random()*scoreboardLength), Math.floor(Math.random()*scoreboardLength));
@@ -770,7 +770,7 @@ function showAnimation(){
         drawShirt(leftShirt, 1, 30 * progress); // Glow left
         drawShirt(rightShirt, 1 - progress, 0); // Shrink right
 
-        if (progress >= 1 && totalVotes > 10) {
+        if (progress >= 1) {
             // 20% chance of reviving old shirt
             if(Math.random() < 0.2){
                 rightShirt = getOldShirt(leftShirt);
@@ -789,7 +789,7 @@ function showAnimation(){
         drawShirt(leftShirt, 1 - progress, 0); // Shrink left
         drawShirt(rightShirt, 1, 30 * progress); // Glow right
 
-        if (progress >= 1 && totalVotes > 10) {
+        if (progress >= 1) {
             if(Math.random() < 0.2){
                 leftShirt = getOldShirt(rightShirt);
                 if(!leftShirt){
@@ -807,6 +807,7 @@ function showAnimation(){
 
 function checkScoreboardTransition() {
     if (totalVotes % 10 === 0) {
+        loadSaveData();
         currentState = GameState.DISPLAY_SCOREBOARD;
         leftButton.hide();
         rightButton.hide();
