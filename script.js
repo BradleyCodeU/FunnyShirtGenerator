@@ -770,7 +770,7 @@ function showAnimation(){
         drawShirt(leftShirt, 1, 30 * progress); // Glow left
         drawShirt(rightShirt, 1 - progress, 0); // Shrink right
 
-        if (progress >= 1) {
+        if (progress >= 1 && totalVotes > 10) {
             // 20% chance of reviving old shirt
             if(Math.random() < 0.2){
                 rightShirt = getOldShirt(leftShirt);
@@ -789,7 +789,7 @@ function showAnimation(){
         drawShirt(leftShirt, 1 - progress, 0); // Shrink left
         drawShirt(rightShirt, 1, 30 * progress); // Glow right
 
-        if (progress >= 1) {
+        if (progress >= 1 && totalVotes > 10) {
             if(Math.random() < 0.2){
                 leftShirt = getOldShirt(rightShirt);
                 if(!leftShirt){
