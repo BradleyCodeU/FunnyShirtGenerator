@@ -1,3 +1,7 @@
+const SUPABASE_URL='https://ydwxnjafnydeinrtoijd.supabase.co'
+const SUPABASE_PUBLISHABLE_KEY='sb_publishable_aTVF2pZ1lK4-ILWQP0v-LQ_zTZpj-sE'
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
 let images = [];
 let maxTextWidth = 700; 
 let maxImageSize = 700; 
@@ -554,22 +558,42 @@ async function setup() {
     backButton.hide();
 }
 
-function loadSaveData(){
-    let savedScoreboard = localStorage.getItem('teeKOScoreboard');
-    let savedTotalVotes = localStorage.getItem('teeKOTotalVotes');
+async function loadSaveData() {
+    const { data, error } = await supabaseClient
+        .from('scoreboard')
+        .select('shirt_key, votes');
 
-    if (savedScoreboard) {
-        scoreboard = JSON.parse(savedScoreboard);
+    if (error) {
+        console.error('Failed to load scoreboard:', error);
+        return;
     }
-    if (savedTotalVotes) {
-        totalVotes = parseInt(savedTotalVotes);
-    }
+
+    scoreboard = {};
+    data.forEach(row => {
+        if (isValidShirtKey(row.shirt_key)) {
+            scoreboard[row.shirt_key] = row.votes;
+        } else {
+            console.warn('Ignored invalid DB shirt key:', row.shirt_key);
+        }
+    });
 }
 
-function saveGame(){
-    localStorage.setItem('teeKOScoreboard', JSON.stringify(scoreboard));
-    localStorage.setItem('teeKOTotalVotes', totalVotes.toString());
-}
+// function loadSaveData(){
+//     let savedScoreboard = localStorage.getItem('teeKOScoreboard');
+//     let savedTotalVotes = localStorage.getItem('teeKOTotalVotes');
+
+//     if (savedScoreboard) {
+//         scoreboard = JSON.parse(savedScoreboard);
+//     }
+//     if (savedTotalVotes) {
+//         totalVotes = parseInt(savedTotalVotes);
+//     }
+// }
+
+// function saveGame(){
+//     localStorage.setItem('teeKOScoreboard', JSON.stringify(scoreboard));
+//     localStorage.setItem('teeKOTotalVotes', totalVotes.toString());
+// }
 
 function draw() {
     background(255);
@@ -589,15 +613,25 @@ function draw() {
     }
 }
 
-function getShirtFromScoreboard(index){
-    let sortedScores = Object.entries(scoreboard).sort((a, b) => b[1] - a[1]);
-    let numItems = Math.min(15, sortedScores.length);
-    if(numItems === 0){
+function getShirtFromScoreboard(index) {
+    // Only sort and select from validated keys
+    let sortedScores = Object.entries(scoreboard)
+        .filter(([key]) => isValidShirtKey(key))
+        .sort((a, b) => b[1] - a[1]);
+
+    if (index < 0 || index >= sortedScores.length) {
         return null;
     }
+
     let [key, score] = sortedScores[index];
     let parts = key.split('|');
     let imgIndex = imageFilenames.indexOf(parts[1]);
+
+    if (imgIndex === -1 || !images[imgIndex]) {
+        console.error('Image asset missing for shirt key:', key);
+        return null;
+    }
+
     return {
         img: resizeImage(images[imgIndex], maxImageSize, maxImageSize),
         filename: imageFilenames[imgIndex],
@@ -782,16 +816,41 @@ function checkScoreboardTransition() {
     }
 }
 
-function recordVote(winningShirt) {
-    let protocolKey = winningShirt.text + "|" + winningShirt.filename;
-    
+async function recordVote(winningShirt) {
+    if (!winningShirt || !winningShirt.text || !winningShirt.filename) {
+        console.error('Aborting vote: invalid shirt object', winningShirt);
+        return;
+    }
+
+    let protocolKey = winningShirt.text.trim() + "|" + winningShirt.filename.trim();
+
+    if (!isValidShirtKey(protocolKey)) {
+        console.error('Aborting vote: generated shirt key is invalid:', protocolKey);
+        return;
+    }
+
     if (!scoreboard[protocolKey]) {
         scoreboard[protocolKey] = 0;
     }
     scoreboard[protocolKey]++;
     totalVotes++;
-    saveGame();
+
+    const { error } = await supabaseClient.rpc('add_vote', { shirt_key_input: protocolKey });
+    if (error) {
+        console.error('Error saving vote to database:', error);
+    }
 }
+
+// function recordVote(winningShirt) {
+//     let protocolKey = winningShirt.text + "|" + winningShirt.filename;
+    
+//     if (!scoreboard[protocolKey]) {
+//         scoreboard[protocolKey] = 0;
+//     }
+//     scoreboard[protocolKey]++;
+//     totalVotes++;
+//     saveGame();
+// }
 
 function voteLeft() {
     if (currentState === GameState.IDLE) {
@@ -850,6 +909,19 @@ function generateShirtData(xPos) {
         x: xPos,
         votes: 0
     };
+}
+
+function isValidShirtKey(key) {
+    if (!key || typeof key !== 'string') return false;
+
+    const parts = key.split('|');
+    if (parts.length < 2) return false;
+
+    const textPart = parts[0].trim();
+    const filenamePart = parts[1].trim();
+
+    // Ensure caption is non-empty and filename exists in imageFilenames
+    return textPart.length > 0 && imageFilenames.includes(filenamePart);
 }
 
 function drawShirt(shirtData, scaleMod = 1, glow = 0) {
